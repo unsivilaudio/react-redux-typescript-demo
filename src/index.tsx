@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader/root';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { applyMiddleware, createStore } from 'redux';
@@ -15,9 +16,14 @@ const store = createStore(
     composeWithDevTools(applyMiddleware(thunk))
 );
 
-ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.getElementById('root')
-);
+const Main = () => {
+    return (
+        <Provider store={store}>
+            <App />
+        </Provider>
+    );
+};
+
+const Wrapper = hot(Main);
+
+ReactDOM.render(<Wrapper />, document.getElementById('root'));
